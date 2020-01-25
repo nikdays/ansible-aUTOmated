@@ -1,0 +1,135 @@
+#!/usr/bin/python3
+import subprocess,colorama
+from colorama import Fore,Back,Style
+######################################################logo#########################################
+def logo():
+
+	print(Fore.GREEN+Back.BLACK+Style.BRIGHT+'''\n\n\n
+\t █████╗ ███╗   ██╗███████╗██╗██████╗ ██╗     ███████╗     █████╗ ██╗   ██╗████████╗ ██████╗ ███╗   ███╗ █████╗ ████████╗███████╗██████╗ 
+\t██╔══██╗████╗  ██║██╔════╝██║██╔══██╗██║     ██╔════╝    ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗████╗ ████║██╔══██╗╚══██╔══╝██╔════╝██╔══██╗
+\t███████║██╔██╗ ██║███████╗██║██████╔╝██║     █████╗      ███████║██║   ██║   ██║   ██║   ██║██╔████╔██║███████║   ██║   █████╗  ██║  ██║
+\t██╔══██║██║╚██╗██║╚════██║██║██╔══██╗██║     ██╔══╝      ██╔══██║██║   ██║   ██║   ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝  ██║  ██║
+\t██║  ██║██║ ╚████║███████║██║██████╔╝███████╗███████╗    ██║  ██║╚██████╔╝   ██║   ╚██████╔╝██║ ╚═╝ ██║██║  ██║   ██║   ███████╗██████╔╝
+\t╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═════╝ 
+\t                                                                                                                                        
+
+''')
+
+def action():
+	print(Back.BLACK+Fore.YELLOW+Style.BRIGHT+"\t1:>Ping Groups\n\t2:>Run a Command\n\t3:>Run a script\n\t4:>Exit..!! ")
+	a=input(Style.BRIGHT+"Choose your Action:> ")
+	if a.isdigit()==False:
+		print(Fore.RED+"Chose a Valid option!!!")
+		action()
+	elif int(a)==1:
+		png()
+		action()
+	elif int(a)==2:
+		cmmd()
+		action()
+	elif int(a)==3:
+		rnscrpt()
+		action()
+	elif int(a)==4:
+		print(Fore.RED+Style.BRIGHT+'''\n\n\n
+\t ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄        ▄▄▄▄▄▄▄▄▄▄   ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄       ▄  ▄  ▄ 
+\t▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌      ▐░░░░░░░░░░▌ ▐░▌       ▐░▌▐░░░░░░░░░░░▌     ▐░▌▐░▌▐░▌
+\t▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀      ▐░▌▐░▌▐░▌
+\t▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌               ▐░▌▐░▌▐░▌
+\t▐░▌ ▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄      ▐░▌▐░▌▐░▌
+\t▐░▌▐░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌▐░▌▐░▌
+\t▐░▌ ▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀      ▐░▌▐░▌▐░▌
+\t▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌       ▐░▌     ▐░▌     ▐░▌                ▀  ▀  ▀ 
+\t▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌     ▐░█▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄▄▄       ▄  ▄  ▄ 
+\t▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌      ▐░░░░░░░░░░▌      ▐░▌     ▐░░░░░░░░░░░▌     ▐░▌▐░▌▐░▌
+\t ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀        ▀▀▀▀▀▀▀▀▀▀        ▀       ▀▀▀▀▀▀▀▀▀▀▀       ▀  ▀  ▀ 
+                                                                                                              
+''')
+
+
+	else:
+		print(Fore.RED+Style.BRIGHT+'Option out of Range!!! Please Choose a valid Option!')
+		action()
+##############################################logo############################################################
+##############################################png#############################################################
+def png():
+	print(Fore.GREEN+Style.BRIGHT+"1.Ping a group:>\n2.Ping all:>")
+	a=input(Fore.GREEN+Style.BRIGHT+"Choose YOur Option:>")
+	if int(a)==2:
+		abc=subprocess.Popen(["ansible","-m","ping","all"],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+		stdout,stderr = abc.communicate()
+		abc=stdout.decode("utf-8")
+		print(Style.RESET_ALL+"\n"+abc)
+	elif int(a)==1:
+		grp=input("Give The Group Name:>")
+		abc=subprocess.Popen(["ansible","-m","ping",grp],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+		stdout,stderr = abc.communicate()
+		abc=stdout.decode("utf-8")
+		print("\n"+abc)
+	else:
+		print(Fore.RED+Style.BRIGHT+"Invalid input")
+	action()
+########################################################png######################################################
+########################################################scripting################################################
+def rnscrpt():
+	print(Fore.YELLOW+Style.BRIGHT+"1.TO run on a Group:>\n2.To run on all:>")
+	b=input(Fore.YELLOW+Style.BRIGHT+"Choose Option:>")
+	a=input(Fore.GREEN+Style.BRIGHT+'choose script type\n1.Python\n2.Bash or sh')
+	j=''
+	if b.isdigit()==False:
+		print(Fore.RED+Style.BRIGHT+"Invalid input.Please chose correct Option!!!!")
+	elif int(b)==1:
+		grp=input("Give The Group Name:>")
+	elif int(b)==2:
+		grp="all"
+	elif a.isdigit()==False:
+		print(Fore.RED+Style.BRIGHT+"Invalid input.Please chose correct Option!!!!")
+	elif int(a)==1:
+		j="python3"
+	elif int(a)==2:
+		j="bash"
+	print(j)
+	scrpt=input(Fore.GREEN+Style.BRIGHT+"Give the full path of the Script:> ")
+	dest="/root/ansible/script"
+	abc=subprocess.Popen(["ansible","-m","copy","-a","src={} dest={}".format(scrpt,dest),grp],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+	stdout,stderr = abc.communicate()
+	abc=stdout.decode("utf-8")
+	print(Style.BRIGHT+abc)
+	scrpt=scrpt.split('/')
+	abc=subprocess.Popen(["ansible", "-m", "command","-a", "chmod 755 /root/ansible/script/{}".format(scrpt[-1]),grp],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+	stdout,stderr = abc.communicate()
+	abc=stdout.decode("utf-8")
+	print(Style.BRIGHT+abc)
+	abc=subprocess.Popen(["ansible", "-m", "shell","-a","{} /root/ansible/script/{}".format(j,scrpt[-1]),grp],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+	stdout,stderr = abc.communicate()
+	abc=stdout.decode("utf-8")
+	print(Style.BRIGHT+abc)
+	action()
+#######################################################scripting#################################################
+#######################################################command###################################################
+def cmmd():
+	a=input(Fore.YELLOW+Style.BRIGHT+"Give the Command")
+	print(Fore.YELLOW+Style.BRIGHT+"1.TO run on a Group:>\n2.To run on all:>")
+	grp=input(Fore.GREEN+Style.BRIGHT+"Choose Option:>")
+	if int(grp)==1:
+		j=input(Fore.GREEN+Style.BRIGHT+"Give the Group Name:> ")
+		abc=subprocess.Popen(["ansible","-m","command", "-a",str(a),j],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+		stdout,stderr = abc.communicate()
+		abc=stdout.decode("utf-8")
+		print(Style.BRIGHT+"\n"+abc)
+	elif int(grp)==2:
+		abc=subprocess.Popen(["ansible","-m","command", "-a",str(a),"all"],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+		stdout,stderr = abc.communicate()
+		abc=stdout.decode("utf-8")
+		print(Style.BRIGHT+"\n"+abc)
+	action()
+#######################################################command####################################################
+
+def main():
+	try:
+		logo()
+		action()
+	except KeyboardInterrupt:
+		print(Fore.RED+Style.BRIGHT+"\nKeyboardInterrupt!!! .....Exiting!!!")
+if __name__=='__main__':
+	main()
